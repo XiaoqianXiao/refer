@@ -1,0 +1,7 @@
+No protocol specified
+No window system found.  Java option 'MWT' ignored.
+ classify_genotype_searchlight_para([1:5000]+5000*(-1),);quit;
+                                                      |
+{Error: Unbalanced or unexpected parenthesis or bracket.
+} 
+

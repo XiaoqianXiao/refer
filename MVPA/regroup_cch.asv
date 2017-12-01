@@ -1,0 +1,40 @@
+% IQ 7; memory 8; RT 9;
+
+clear all;
+load CFAVBM
+% vbm=sortrows(vbm,[1]); % make sure subjects order alphabet, corresponding to VBM data
+gendercolumn=4; % gender 1 2
+
+for fac=[19 20 21]
+    isok=0;
+    iter=0;
+    while ~isok
+        iter=iter+1
+        i=1;
+        g=nan(length(vbm),1);
+        g(find(vbm(:,gendercolumn)==1))=randperm(length(find(vbm(:,gendercolumn)==1)));
+        g(find(vbm(:,gendercolumn)==2))=randperm(length(find(vbm(:,gendercolumn)==2)));
+        g=mod((g-1),10)+1;
+
+         for i=1:10
+             m(i)=mean(vbm(g==i,fac));
+             s(i)=std(vbm(g==i,fac));
+         end
+%          vbmname(fac)
+%          max(m)-min(m)
+%          max(s)-min(s)
+
+         if max(m)-min(m)<0.01 & max(s)-min(s) < 0.01
+             tmp=[a(:,fac) g' a(:,2)];
+             tmp=sortrows(tmp,3); tmp=tmp(:,[1:2]);
+             eval(sprintf('save DDT218%d.txt -ascii -tabs tmp',fac));
+             isok=1;
+         end
+    end
+
+
+end
+
+
+    
+
